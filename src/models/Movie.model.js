@@ -1,7 +1,7 @@
 /**
- * Filme model
+ * Movie model
  */
-export class Filme {
+export class Movie {
     /**
      * Model constructor
      * @param {string} title 
