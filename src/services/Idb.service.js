@@ -50,7 +50,7 @@ export class Idb {
         for (const storeName of STORE_LIST.values()) {
             this._idb.createObjectStore(storeName, {
                 keyPath: 'id',
-                autoIncrement: true
+                autoIncrement: false
             }).createIndex('title', 'title', {
                 unique: false
             });    
