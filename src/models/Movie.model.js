@@ -18,6 +18,9 @@ export class Movie {
         this._favorite = favorite;
     }
     // Getters
+    get id() {
+        return this._id;
+    }
     get title() {
         return this._title;
     }
