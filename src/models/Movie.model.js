@@ -4,19 +4,18 @@
 export class Movie {
     /**
      * Model constructor
-     * @param {string} title 
-     * @param {string} posterPath 
-     * @param {string} [backdropPath] 
-     * @param {boolean} [favorite] 
+     * @param {Number} id
+     * @param {String} title 
+     * @param {String} posterPath 
+     * @param {String} [backdropPath] 
+     * @param {Boolean} [favorite] 
      */
-    constructor(title, posterPath, backdropPath, favorite = false) {
+    constructor(id, title, posterPath, backdropPath, favorite = false) {
+        this._id = id;
         this._title = title;
         this._posterPath = posterPath;
         this._backdropPath = backdropPath;
         this._favorite = favorite;
-    }
-    toggleFavorite() {
-        this._favorite = !this._favorite;
     }
     // Getters
     get title() {
@@ -30,5 +29,18 @@ export class Movie {
     }
     get favorite() {
         return this._favorite;
+    }
+    // Methods
+    toggleFavorite() {
+        this._favorite = !this._favorite;
+    }
+    toJson() {
+        return JSON.stringify({
+            id: this._id,
+            title: this._title,
+            posterPath: this._posterPath,
+            backdropPath: this._backdropPath,
+            favorite: this._favorite
+        });
     }
 }
