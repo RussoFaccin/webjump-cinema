@@ -1,7 +1,6 @@
 import { Component } from './lib/Component';
 // Api
-import { api } from './api/api';
-import { API_KEY } from './api/apiParams';
+import { api, API_KEY } from './api/api';
 // Services
 import { Idb } from './services/Idb.service';
 
