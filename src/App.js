@@ -1,11 +1,40 @@
 import { Component } from './lib/Component';
+// Api
+import { api } from './api/api';
+import { API_KEY } from './api/apiParams';
+// Services
+import { Idb } from './services/Idb.service';
 
 export class App extends Component {
     constructor(elSelector) {
         super(elSelector);
+        // DB
+        this.idb = new Idb();
 
-        this.state = {};
+        this.state = {
+            upcomingMovies: [],
+            popularMovies: [],
+            playingMovies: [],
+            favoriteMovies: []
+        };
+        // Get movies
+        this.getMovies();
+
         this.render();
+    }
+    async getMovies() {
+        // Upcoming movies. Latest 3.
+        const upcomingMovies = await api.get('/upcoming', {
+            params: {
+                api_key: API_KEY
+            }
+        });
+        
+        this.setState({
+            upcomingMovies: upcomingMovies.data.results.splice(0, 3)
+        });
+
+        this.idb.putData(upcomingMovies.data.results.splice(0, 3), 'upcoming');
     }
     render() {
         this.nodeRoot.innerHTML = `
