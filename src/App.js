@@ -33,6 +33,24 @@ export class App extends Component {
         });
 
         this.idb.putData(upcomingMovies.splice(0, 3), 'upcoming');
+
+        // Popular movies. Latest 10.
+        const popularMovies = await this.DataService.getMovieList('popular');
+        
+        this.setState({
+            popularMovies: popularMovies.splice(0, 10)
+        });
+
+        this.idb.putData(popularMovies.splice(0, 10), 'popular');
+
+        // Now playing movies. Latest 10.
+        const playingMovies = await this.DataService.getMovieList('now_playing');
+        
+        this.setState({
+            playingMovies: playingMovies.splice(0, 10)
+        });
+
+        this.idb.putData(playingMovies.splice(0, 10), 'now_playing');
     }
     render() {
         this.nodeRoot.innerHTML = `
