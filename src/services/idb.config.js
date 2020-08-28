@@ -2,7 +2,7 @@ export const idbConfig = {
     DB_NAME: 'cinemaDB',
     STORE_LIST: new Map([
         ['popular', 'popularMovies'],
-        ['playing', 'nowPlayingMovies'],
+        ['now_playing', 'nowPlayingMovies'],
         ['upcoming', 'upcomingMovies']
     ])
 }
