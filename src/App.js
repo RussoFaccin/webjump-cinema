@@ -3,12 +3,15 @@ import { Component } from './lib/Component';
 import { api, API_KEY } from './api/api';
 // Services
 import { Idb } from './services/Idb.service';
+import { DataService } from './services/data.service';
 
 export class App extends Component {
     constructor(elSelector) {
         super(elSelector);
         // DB
         this.idb = new Idb();
+        // Data service
+        this.DataService = new DataService();
 
         this.state = {
             upcomingMovies: [],
@@ -23,17 +26,13 @@ export class App extends Component {
     }
     async getMovies() {
         // Upcoming movies. Latest 3.
-        const upcomingMovies = await api.get('/upcoming', {
-            params: {
-                api_key: API_KEY
-            }
-        });
+        const upcomingMovies = await this.DataService.getMovieList('upcoming');
         
         this.setState({
-            upcomingMovies: upcomingMovies.data.results.splice(0, 3)
+            upcomingMovies: upcomingMovies.splice(0, 3)
         });
 
-        this.idb.putData(upcomingMovies.data.results.splice(0, 3), 'upcoming');
+        this.idb.putData(upcomingMovies.splice(0, 3), 'upcoming');
     }
     render() {
         this.nodeRoot.innerHTML = `
