@@ -77,17 +77,20 @@ export class App extends Component {
                 <main class="appMain">
                     <section class="latestContainer">
                         <div class="latestContainer__main">
+                            <img src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdrop_path}"/>
                             <div class="latestContainer__mainDescription"
-                                <h4 class="latestContainer__mainTitle">1917</h4>
-                                <p class="latestContainer__mainText">Lightning McQueen, a hotshot rookie race car driven to succeed, discovers that life is about the journey, not the finish line, when he finds himself unexpectedly detoured in the sleepy Route</p>
+                                <h4 class="latestContainer__mainTitle">${this.state.upcomingMovies[0]?.title}</h4>
+                                <p class="latestContainer__mainText">${this.state.upcomingMovies[0]?.overview}</p>
                             </div>
                         </div>
                         <div class="latestContainer__secondary">
                             <div class="secondaryMovie">
-                                <h4 class="secondaryMovie__title">Carros 2</h4>
+                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path}"/>
+                                <h4 class="secondaryMovie__title">${this.state.upcomingMovies[1]?.title}</h4>
                             </div>
                             <div class="secondaryMovie">
-                                <h4 class="secondaryMovie__title">Bad Boys 2</h4>
+                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path}"/>
+                                <h4 class="secondaryMovie__title">${this.state.upcomingMovies[2]?.title}</h4>
                             </div>
                         </div>
                     </section>
