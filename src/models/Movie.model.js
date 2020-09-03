@@ -19,15 +19,15 @@ export class Movie {
     }
     // Methods
     toggleFavorite() {
-        this._favorite = !this._favorite;
+        this.favorite = !this.favorite;
     }
     toJson() {
         return {
-            id: this._id,
-            title: this._title,
-            posterPath: this._posterPath,
-            backdropPath: this._backdropPath,
-            favorite: this._favorite
+            id: this.id,
+            title: this.title,
+            posterPath: this.posterPath,
+            backdropPath: this.backdropPath,
+            favorite: this.favorite
         };
     }
 }
