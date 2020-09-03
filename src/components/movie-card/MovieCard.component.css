@@ -1,0 +1,24 @@
+.movieCard {
+    width: 165px;
+    height: 253px;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.movieCard__favoriteIcon {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    fill: #000;
+}
+
+.movieCard__favoriteIcon--active {
+    fill: #E83F5B;;
+}
+
+.movieCard__poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
