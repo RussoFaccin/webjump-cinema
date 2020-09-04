@@ -85,7 +85,7 @@ export class App extends Component {
                 <main class="appMain">
                     <section class="latestContainer">
                         <div class="latestContainer__main">
-                            <img src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdropPath}"/>
+                            <img src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdrop_path}"/>
                             <div class="latestContainer__mainDescription"
                                 <h4 class="latestContainer__mainTitle">${this.state.upcomingMovies[0]?.title}</h4>
                                 <p class="latestContainer__mainText">${this.state.upcomingMovies[0]?.overview}</p>
@@ -93,11 +93,11 @@ export class App extends Component {
                         </div>
                         <div class="latestContainer__secondary">
                             <div class="secondaryMovie">
-                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdropPath}"/>
+                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path}"/>
                                 <h4 class="secondaryMovie__title">${this.state.upcomingMovies[1]?.title}</h4>
                             </div>
                             <div class="secondaryMovie">
-                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdropPath}"/>
+                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path}"/>
                                 <h4 class="secondaryMovie__title">${this.state.upcomingMovies[2]?.title}</h4>
                             </div>
                         </div>
