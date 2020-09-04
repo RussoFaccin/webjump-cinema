@@ -13,8 +13,8 @@ export class Movie {
     constructor({id, title, poster_path, backdrop_path, favorite = false}) {
         this.id = id;
         this.title = title;
-        this.posterPath = poster_path;
-        this.backdropPath = backdrop_path;
+        this.poster_path = poster_path;
+        this.backdrop_path = backdrop_path;
         this.favorite = favorite;
     }
     // Methods
@@ -25,8 +25,8 @@ export class Movie {
         return {
             id: this.id,
             title: this.title,
-            posterPath: this.poster_path,
-            backdropPath: this.backdrop_path,
+            poster_path: this.poster_path,
+            backdrop_path: this.backdrop_path,
             favorite: this.favorite
         };
     }
