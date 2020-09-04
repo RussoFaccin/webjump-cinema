@@ -25,8 +25,8 @@ export class Movie {
         return {
             id: this.id,
             title: this.title,
-            posterPath: this.posterPath,
-            backdropPath: this.backdropPath,
+            posterPath: this.poster_path,
+            backdropPath: this.backdrop_path,
             favorite: this.favorite
         };
     }
