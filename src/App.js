@@ -4,6 +4,8 @@ import { api, API_KEY } from './api/api';
 // Services
 import { Idb } from './services/Idb.service';
 import { DataService } from './services/data.service';
+// Models
+import { Movie } from './models/Movie.model';
 
 export class App extends Component {
     constructor(elSelector) {
@@ -29,7 +31,9 @@ export class App extends Component {
         const upcomingMovies = await this.DataService.getMovieList('upcoming');
         
         this.setState({
-            upcomingMovies: upcomingMovies.splice(0, 3)
+            upcomingMovies: upcomingMovies.splice(0, 3).map((movie) => {
+                return new Movie(movie);
+            })
         });
 
         this.idb.putData(upcomingMovies.splice(0, 3), 'upcoming');
@@ -38,7 +42,9 @@ export class App extends Component {
         const popularMovies = await this.DataService.getMovieList('popular');
         
         this.setState({
-            popularMovies: popularMovies.splice(0, 10)
+            popularMovies: popularMovies.splice(0, 10).map((movie) => {
+                return new Movie(movie);
+            })
         });
 
         this.idb.putData(popularMovies.splice(0, 10), 'popular');
@@ -47,7 +53,9 @@ export class App extends Component {
         const playingMovies = await this.DataService.getMovieList('now_playing');
         
         this.setState({
-            playingMovies: playingMovies.splice(0, 10)
+            playingMovies: playingMovies.splice(0, 10).map((movie) => {
+                return new Movie(movie);
+            })
         });
 
         this.idb.putData(playingMovies.splice(0, 10), 'now_playing');
@@ -77,7 +85,7 @@ export class App extends Component {
                 <main class="appMain">
                     <section class="latestContainer">
                         <div class="latestContainer__main">
-                            <img src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdrop_path}"/>
+                            <img src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdropPath}"/>
                             <div class="latestContainer__mainDescription"
                                 <h4 class="latestContainer__mainTitle">${this.state.upcomingMovies[0]?.title}</h4>
                                 <p class="latestContainer__mainText">${this.state.upcomingMovies[0]?.overview}</p>
@@ -85,11 +93,11 @@ export class App extends Component {
                         </div>
                         <div class="latestContainer__secondary">
                             <div class="secondaryMovie">
-                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path}"/>
+                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdropPath}"/>
                                 <h4 class="secondaryMovie__title">${this.state.upcomingMovies[1]?.title}</h4>
                             </div>
                             <div class="secondaryMovie">
-                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path}"/>
+                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdropPath}"/>
                                 <h4 class="secondaryMovie__title">${this.state.upcomingMovies[2]?.title}</h4>
                             </div>
                         </div>
