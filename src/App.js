@@ -4,6 +4,8 @@ import { Idb } from './services/Idb.service';
 import { DataService } from './services/data.service';
 // Models
 import { Movie } from './models/Movie.model';
+// Components
+import { MovieCard } from './components/movie-card/MovieCard.component';
 
 export class App extends Component {
     constructor(elSelector) {
@@ -27,7 +29,7 @@ export class App extends Component {
     async getMovies() {
         // Upcoming movies. Latest 3.
         const upcomingMovies = await this.dataService.getMovieList('upcoming');
-        
+
         this.setState({
             upcomingMovies: upcomingMovies.splice(0, 3).map((movie) => {
                 return new Movie(movie);
@@ -38,7 +40,7 @@ export class App extends Component {
 
         // Popular movies. Latest 10.
         const popularMovies = await this.dataService.getMovieList('popular');
-        
+
         this.setState({
             popularMovies: popularMovies.splice(0, 10).map((movie) => {
                 return new Movie(movie);
@@ -49,7 +51,7 @@ export class App extends Component {
 
         // Now playing movies. Latest 10.
         const playingMovies = await this.dataService.getMovieList('now_playing');
-        
+
         this.setState({
             playingMovies: playingMovies.splice(0, 10).map((movie) => {
                 return new Movie(movie);
@@ -125,5 +127,37 @@ export class App extends Component {
                 </footer>
             </div>
         `;
+
+        // Popular movies
+        this.renderPopularMovies();
+
+        // Now playing movies
+        this.renderPlayingMovies();
+    }
+    renderPopularMovies() {
+        const popular = this.state.popularMovies.map((movie) => {
+            return new MovieCard(movie);
+        });
+
+        this._renderMovieList(popular, '.movieContainer__popular');
+    }
+    renderPlayingMovies() {
+        const nowPlaying = this.state.playingMovies.map((movie) => {
+            return new MovieCard(movie);
+        });
+
+        this._renderMovieList(nowPlaying, '.movieContainer__playing');
+    }
+    /**
+     * Render a list of movies on target container
+     * @param {Movie[]} movieList list of movies
+     * @param {String} targetContainerSelector container selector
+     */
+    _renderMovieList(movieList, targetContainerSelector) {
+        const target = this.nodeRoot.querySelector(targetContainerSelector);
+        
+        movieList.forEach((movie) => {
+            target.append(movie);
+        });
     }
 }
