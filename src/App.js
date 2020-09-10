@@ -1,6 +1,4 @@
 import { Component } from './lib/Component';
-// Api
-import { api, API_KEY } from './api/api';
 // Services
 import { Idb } from './services/Idb.service';
 import { DataService } from './services/data.service';
@@ -13,7 +11,7 @@ export class App extends Component {
         // DB
         this.idb = new Idb();
         // Data service
-        this.DataService = new DataService();
+        this.dataService = new DataService();
 
         this.state = {
             upcomingMovies: [],
@@ -28,7 +26,7 @@ export class App extends Component {
     }
     async getMovies() {
         // Upcoming movies. Latest 3.
-        const upcomingMovies = await this.DataService.getMovieList('upcoming');
+        const upcomingMovies = await this.dataService.getMovieList('upcoming');
         
         this.setState({
             upcomingMovies: upcomingMovies.splice(0, 3).map((movie) => {
@@ -39,7 +37,7 @@ export class App extends Component {
         this.idb.putData(upcomingMovies.splice(0, 3), 'upcoming');
 
         // Popular movies. Latest 10.
-        const popularMovies = await this.DataService.getMovieList('popular');
+        const popularMovies = await this.dataService.getMovieList('popular');
         
         this.setState({
             popularMovies: popularMovies.splice(0, 10).map((movie) => {
@@ -50,7 +48,7 @@ export class App extends Component {
         this.idb.putData(popularMovies.splice(0, 10), 'popular');
 
         // Now playing movies. Latest 10.
-        const playingMovies = await this.DataService.getMovieList('now_playing');
+        const playingMovies = await this.dataService.getMovieList('now_playing');
         
         this.setState({
             playingMovies: playingMovies.splice(0, 10).map((movie) => {
