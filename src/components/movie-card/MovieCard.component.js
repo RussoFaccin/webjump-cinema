@@ -1,42 +1,18 @@
 import './MovieCard.component.css';
 // Models
 import { Movie } from '../../models/Movie.model';
+// Components
+import { CustomElement } from '../../lib/CustomElement';
 
-export class MovieCard extends HTMLElement {
-  constructor({id, title, backdrop_path, poster_path, favorite}) {
-    super();
-
-    this.setProxyValidator();
-
-    this.state = new Proxy(
-      {
-        id: id,
-        title: title,
-        backdrop_path: backdrop_path,
-        poster_path: poster_path,
-        favorite: favorite
-      },
-      this._validator
-    )
+export class MovieCard extends CustomElement {
+  constructor(props) {
+    super(props);
 
     this.addEventListener('click', () => {
       this.toggleFavorite();
     });
     
   }
-
-  setProxyValidator() {
-    this._validator = {
-        set(target, prop, value) {
-            target[prop] = value;
-            this.render();
-
-            return Reflect.set(...arguments);
-        }
-    }
-
-    this._validator.set = this._validator.set.bind(this);
-}
 
   render() {
     this.innerHTML = `
