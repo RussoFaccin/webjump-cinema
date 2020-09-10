@@ -1,4 +1,6 @@
 import { Component } from './lib/Component';
+// Config
+import { MOVIE_INFO_LIST, RENDER_MOVIE_INFO } from './App.config';
 // Services
 import { Idb } from './services/Idb.service';
 import { DataService } from './services/data.service';
@@ -10,56 +12,18 @@ import { MovieCard } from './components/movie-card/MovieCard.component';
 export class App extends Component {
     constructor(elSelector) {
         super(elSelector);
-        // DB
+        
         this.idb = new Idb();
-        // Data service
+        
         this.dataService = new DataService();
 
-        this.state = {
-            upcomingMovies: [],
-            popularMovies: [],
-            playingMovies: [],
-            favoriteMovies: []
-        };
-        // Get movies
+        this.initState();
+        
         this.getMovies();
 
         this.render();
     }
-    async getMovies() {
-        // Upcoming movies. Latest 3.
-        const upcomingMovies = await this.dataService.getMovieList('upcoming');
 
-        this.setState({
-            upcomingMovies: upcomingMovies.splice(0, 3).map((movie) => {
-                return new Movie(movie);
-            })
-        });
-
-        this.idb.putData(upcomingMovies.splice(0, 3), 'upcoming');
-
-        // Popular movies. Latest 10.
-        const popularMovies = await this.dataService.getMovieList('popular');
-
-        this.setState({
-            popularMovies: popularMovies.splice(0, 10).map((movie) => {
-                return new Movie(movie);
-            })
-        });
-
-        this.idb.putData(popularMovies.splice(0, 10), 'popular');
-
-        // Now playing movies. Latest 10.
-        const playingMovies = await this.dataService.getMovieList('now_playing');
-
-        this.setState({
-            playingMovies: playingMovies.splice(0, 10).map((movie) => {
-                return new Movie(movie);
-            })
-        });
-
-        this.idb.putData(playingMovies.splice(0, 10), 'now_playing');
-    }
     render() {
         this.nodeRoot.innerHTML = `
             <div class="appContent">
@@ -128,25 +92,40 @@ export class App extends Component {
             </div>
         `;
 
-        // Popular movies
-        this.renderPopularMovies();
-
-        // Now playing movies
-        this.renderPlayingMovies();
+        this.renderMovieSection();
     }
-    renderPopularMovies() {
-        const popular = this.state.popularMovies.map((movie) => {
-            return new MovieCard(movie);
-        });
-
-        this._renderMovieList(popular, '.movieContainer__popular');
+    
+    initState() {
+        this.state = {
+            upcomingMovies: [],
+            popularMovies: [],
+            playingMovies: [],
+            favoriteMovies: []
+        };
     }
-    renderPlayingMovies() {
-        const nowPlaying = this.state.playingMovies.map((movie) => {
-            return new MovieCard(movie);
-        });
 
-        this._renderMovieList(nowPlaying, '.movieContainer__playing');
+    async getMovies() {
+        MOVIE_INFO_LIST.forEach(async (movieInfo) => {
+            const movieList = await this.dataService.getMovieList(movieInfo.urlKey);
+
+            this.setState({
+                [movieInfo.listKey]: movieList.splice(0, movieInfo.qty).map((movie) => {
+                    return new Movie(movie);
+                })
+            });
+
+            this.idb.putData(movieList.splice(0, movieInfo.qty), movieInfo.urlKey);
+        });
+    }
+    
+    renderMovieSection() {
+        RENDER_MOVIE_INFO.forEach((movieInfo) => {
+            const movies = this.state[movieInfo.stateKey].map((movie) => {
+                return new MovieCard(movie);
+            });
+    
+            this._renderMovieList(movies, movieInfo.containerSelector);
+        });
     }
     /**
      * Render a list of movies on target container
