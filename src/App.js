@@ -18,8 +18,10 @@ export class App extends Component {
         this.dataService = new DataService();
 
         this.initState();
+
+        this.setBindings();
         
-        this.getMovies();
+        this.getMoviesAPI();
 
         this.render();
     }
@@ -104,7 +106,11 @@ export class App extends Component {
         };
     }
 
-    async getMovies() {
+    setBindings() {
+        this.toggleFavorite = this.toggleFavorite.bind(this);
+    }
+
+    async getMoviesAPI() {
         MOVIE_INFO_LIST.forEach(async (movieInfo) => {
             const movieList = await this.dataService.getMovieList(movieInfo.urlKey);
 
@@ -117,16 +123,61 @@ export class App extends Component {
             this.idb.putData(movieList.splice(0, movieInfo.qty), movieInfo.urlKey);
         });
     }
+    /**
+     * Retrieve movies from state
+     * @param {String} stateKey movie state key
+     */
+    _getMoviesState(stateKey) {
+        const movies = this.state[stateKey].map((movie) => {
+            const foundInFavorite = this.state.favoriteMovies.find((foundMovie) => {
+                return foundMovie.id === movie.id;
+            })
+
+            if (foundInFavorite) {
+                movie.favorite = true;
+            } else {
+                movie.favorite = false;
+            }
+
+            const card = new MovieCard(movie);
+            card.addEventListener('favorite', this.toggleFavorite);
+            
+            return card;
+        });
+
+        return movies;
+    }
     
     renderMovieSection() {
         RENDER_MOVIE_INFO.forEach((movieInfo) => {
-            const movies = this.state[movieInfo.stateKey].map((movie) => {
-                return new MovieCard(movie);
-            });
+            const movies = this._getMoviesState(movieInfo.stateKey);
     
             this._renderMovieList(movies, movieInfo.containerSelector);
         });
     }
+    
+    toggleFavorite(evt) {
+        const movie = evt.detail;
+        const movieId = evt.detail.id;
+        const tmpList = this.state.favoriteMovies;
+        
+        const foundId = this.state.favoriteMovies.findIndex((movie) => {
+            return movie.id === movieId;
+        });
+
+        if (foundId === -1) {
+            tmpList.push(movie);
+        } else {
+            tmpList.splice(foundId, 1);
+        }
+
+        this.setState({
+            favoriteMovies: tmpList
+        });
+
+        this.idb.putData(tmpList, 'favorite');
+    }
+
     /**
      * Render a list of movies on target container
      * @param {Movie[]} movieList list of movies
@@ -134,6 +185,7 @@ export class App extends Component {
      */
     _renderMovieList(movieList, targetContainerSelector) {
         const target = this.nodeRoot.querySelector(targetContainerSelector);
+        target.innerHTML = '';
         
         movieList.forEach((movie) => {
             target.append(movie);

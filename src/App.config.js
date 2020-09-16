@@ -24,5 +24,9 @@ export const RENDER_MOVIE_INFO = [
     {
         stateKey: 'playingMovies',
         containerSelector: '.movieContainer__playing'
+    },
+    {
+        stateKey: 'favoriteMovies',
+        containerSelector: '.movieContainer__favorite'
     }
 ];
