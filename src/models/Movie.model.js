@@ -10,9 +10,10 @@ export class Movie {
      * @param {String} [backdrop_path] 
      * @param {Boolean} [favorite] 
      */
-    constructor({id, title, poster_path, backdrop_path, favorite = false}) {
+    constructor({id, title, overview, poster_path, backdrop_path, favorite = false}) {
         this.id = id;
         this.title = title;
+        this.overview = overview;
         this.poster_path = poster_path;
         this.backdrop_path = backdrop_path;
         this.favorite = favorite;
