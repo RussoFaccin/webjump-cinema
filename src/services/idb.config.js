@@ -3,6 +3,7 @@ export const idbConfig = {
     STORE_LIST: new Map([
         ['popular', 'popularMovies'],
         ['now_playing', 'nowPlayingMovies'],
-        ['upcoming', 'upcomingMovies']
+        ['upcoming', 'upcomingMovies'],
+        ['favorite', 'favoriteMovies']
     ])
 }
