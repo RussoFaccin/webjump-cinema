@@ -1,3 +1,7 @@
+movie-card {
+    display: inline-block;
+}
+
 .movieCard {
     width: 165px;
     height: 253px;
