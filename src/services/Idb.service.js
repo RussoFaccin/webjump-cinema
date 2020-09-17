@@ -62,10 +62,20 @@ export class Idb {
      */
     async getData(storeKey) {
         await this._idb;
-        
-        const transaction = this._idb.transaction(STORE_LIST.get(storeKey))
-        .objectStore(STORE_LIST.get(storeKey))
-        .getAll();
+
+        return new Promise((resolve, reject) => {
+            const transaction = this._idb.transaction(STORE_LIST.get(storeKey))
+                .objectStore(STORE_LIST.get(storeKey))
+                .getAll();
+
+            transaction.addEventListener('success', (evt) => {
+                resolve(transaction.result)
+            });
+
+            transaction.addEventListener('error', (evt) => {
+                reject('Unable to get data', err)
+            });
+        });
     }
     /**
      * Insert data into IndexedDB
