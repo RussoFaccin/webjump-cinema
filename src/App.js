@@ -155,6 +155,19 @@ export class App extends Component {
 
         return movies;
     }
+
+    /**
+     * Put movies into state
+     * @param {String} stateKey 
+     * @param {Movie[]} movieList 
+     */
+    _putMoviesState(stateKey, movieList) {
+        this.setState({
+            [stateKey]: movieList.map((movie) => {
+                return new Movie(movie);
+            })
+        });       
+    }
     
     renderMovieSection() {
         RENDER_MOVIE_INFO.forEach((movieInfo) => {
