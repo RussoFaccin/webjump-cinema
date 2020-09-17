@@ -23,6 +23,8 @@ export class App extends Component {
         
         this.getMoviesAPI();
 
+        this.getFavoriteMovies();
+
         this.render();
     }
 
@@ -122,6 +124,12 @@ export class App extends Component {
 
             this.idb.putData(movieList.splice(0, movieInfo.qty), movieInfo.urlKey);
         });
+    }
+
+    async getFavoriteMovies() {
+        const favoriteMovies = await this.idb.getData('favorite');
+        
+        this.setState({favoriteMovies: favoriteMovies});
     }
     /**
      * Retrieve movies from state
