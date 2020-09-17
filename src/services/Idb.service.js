@@ -66,10 +66,6 @@ export class Idb {
         const transaction = this._idb.transaction(STORE_LIST.get(storeKey))
         .objectStore(STORE_LIST.get(storeKey))
         .getAll();
-
-        transaction.addEventListener('success', (evt) => {
-            console.log(evt.target.result);
-        });
     }
     /**
      * Insert data into IndexedDB
