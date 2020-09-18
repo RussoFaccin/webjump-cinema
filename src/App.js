@@ -116,11 +116,7 @@ export class App extends Component {
         MOVIE_INFO_LIST.forEach(async (movieInfo) => {
             const movieList = await this.dataService.getMovieList(movieInfo.urlKey);
 
-            this.setState({
-                [movieInfo.listKey]: movieList.splice(0, movieInfo.qty).map((movie) => {
-                    return new Movie(movie);
-                })
-            });
+            this._putMoviesState(movieInfo.listKey, movieList.splice(0, movieInfo.qty));
 
             this.idb.putData(movieList.splice(0, movieInfo.qty), movieInfo.urlKey);
         });
@@ -128,8 +124,7 @@ export class App extends Component {
 
     async getFavoriteMovies() {
         const favoriteMovies = await this.idb.getData('favorite');
-        
-        this.setState({favoriteMovies: favoriteMovies});
+        this._putMoviesState('favoriteMovies', favoriteMovies);
     }
     /**
      * Retrieve movies from state
@@ -155,6 +150,19 @@ export class App extends Component {
 
         return movies;
     }
+
+    /**
+     * Put movies into state
+     * @param {String} stateKey 
+     * @param {Movie[]} movieList 
+     */
+    _putMoviesState(stateKey, movieList) {
+        this.setState({
+            [stateKey]: movieList.map((movie) => {
+                return new Movie(movie);
+            })
+        });       
+    }
     
     renderMovieSection() {
         RENDER_MOVIE_INFO.forEach((movieInfo) => {
@@ -179,9 +187,7 @@ export class App extends Component {
             tmpList.splice(foundId, 1);
         }
 
-        this.setState({
-            favoriteMovies: tmpList
-        });
+        this._putMoviesState('favoriteMovies', tmpList)
 
         this.idb.putData(tmpList, 'favorite');
     }
