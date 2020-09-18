@@ -1,4 +1,6 @@
 import { idbConfig } from './idb.config';
+// Models
+import { Movie } from '../models/Movie.model';
 
 const {
     DB_NAME,
@@ -79,7 +81,7 @@ export class Idb {
     }
     /**
      * Insert data into IndexedDB
-     * @param {Array<String>} data 
+     * @param {Array<object>} data 
      * @param {String} storeKey 
      */
     async putData(data, storeKey) {
@@ -94,7 +96,7 @@ export class Idb {
         data.forEach((entry) => {
             this._idb.transaction(STORE_LIST.get(storeKey), 'readwrite')
                 .objectStore(STORE_LIST.get(storeKey))
-                .put(entry);
+                .put(new Movie(entry));
         });
     }
 }
