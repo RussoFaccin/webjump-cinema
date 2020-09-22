@@ -11,8 +11,6 @@ const {
  */
 export class Idb {
     constructor() {
-        this._isReady = false;
-        
         if (this.checkSupport()) {
             this.openDB(DB_NAME);
         }
@@ -26,13 +24,12 @@ export class Idb {
         return true;
     }
     openDB(dbName) {
-        this._idb = new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             const openRequest = indexedDB.open(dbName);
 
             openRequest.addEventListener('success', () => {
                 this._idb = openRequest.result;
-                this._isReady = true;
-                resolve(true);
+                resolve(openRequest.result);
             });
     
             openRequest.addEventListener('error', (err) => {
@@ -42,7 +39,6 @@ export class Idb {
     
             openRequest.addEventListener('upgradeneeded', () => {
                 this._idb = openRequest.result;
-                this._isReady = true;
     
                 this.createStores();
             });
@@ -63,7 +59,7 @@ export class Idb {
      * @param {String} storeKey 
      */
     async getData(storeKey) {
-        await this._idb;
+        await this.openDB(DB_NAME);
 
         return new Promise((resolve, reject) => {
             const transaction = this._idb.transaction(STORE_LIST.get(storeKey))
@@ -85,18 +81,35 @@ export class Idb {
      * @param {String} storeKey 
      */
     async putData(data, storeKey) {
-        await this._idb;
-        
-        // Clear previous data
-        this._idb.transaction(STORE_LIST.get(storeKey), 'readwrite')
-            .objectStore(STORE_LIST.get(storeKey))
-            .clear();
+        await this.openDB(DB_NAME);
+
+        await this._clearData(storeKey);
 
         // put data
         data.forEach((entry) => {
             this._idb.transaction(STORE_LIST.get(storeKey), 'readwrite')
                 .objectStore(STORE_LIST.get(storeKey))
                 .put(new Movie(entry));
+        });
+    }
+
+    /**
+     * Clear previous store data
+     * @param {String} storeKey 
+     */
+    _clearData(storeKey) {
+        return new Promise((resolve, reject) => {
+            const transaction = this._idb.transaction(STORE_LIST.get(storeKey), 'readwrite');
+            const objectStore = transaction.objectStore(STORE_LIST.get(storeKey));
+            const request = objectStore.clear();
+
+            request.addEventListener('success', (evt) => {
+                resolve(request.result);
+            });
+
+            request.addEventListener('error', (evt) => {
+                reject(request.error);
+            })
         });
     }
 }
