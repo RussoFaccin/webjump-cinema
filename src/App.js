@@ -8,6 +8,8 @@ import { DataService } from './services/data.service';
 import { Movie } from './models/Movie.model';
 // Components
 import { MovieCard } from './components/movie-card/MovieCard.component';
+// Assets
+import LogoWhite from './assets/Logo-white.svg'
 
 export class App extends Component {
     constructor(elSelector) {
@@ -32,65 +34,69 @@ export class App extends Component {
         this.nodeRoot.innerHTML = `
             <div class="appContent">
                 <header class="appHeader">
-                    <h1 class="appBrand"><a class="text-hide">Cinejump!</a></h1>
-                    <div class="appHeader__action">
+                    <a href="" class="appBrand">
+                        <img class="appBrand__logo" src="${LogoWhite}" alt="Cinejump!"/>
+                        <h1 class="u-srOnly">Cinejump!</h1>
+                    </a>
+                    <div class="appHeader__action appHeader__action--navigation">
                         <nav class="appNavigation">
-                            <a href="">Filmes</a>
-                            <a href="">Series</a>
+                            <a class="navLink" href="">Filmes</a>
+                            <a class="navLink" href="">Series</a>
                         </nav>
                     </div>
-                    <div class="appHeader__action">
+                    <div class="appHeader__action appHeader__action--subNav">
                         <div class="subNav">
-                            <button class="subNav__action">
-                                <span class="u-srOnly">Search</span>
+                            <button class="subNav__action subNav__icon subNav__icon--iconSearch">
+                                <span class="u-srOnly">Buscar</span>
                             </button>
-                            <a href="" class="subNav__action">
-                                <span class="u-srOnly">Profile</span>
+                            <a href="" class="subNav__action subNav__icon subNav__icon--iconProfile">
+                                <span class="u-srOnly">Perfil</span>
                             </a>
                         </div>
                     </div>
                 </header>
                 <main class="appMain">
                     <section class="latestContainer">
-                        <div class="latestContainer__main">
-                            <img src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdrop_path}"/>
-                            <div class="latestContainer__mainDescription"
+                        <div class="latestContainer__main card">
+                            <img class="cardPicture" src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdrop_path}"/>
+                            <div class="latestContainer__mainDescription">
                                 <h4 class="latestContainer__mainTitle">${this.state.upcomingMovies[0]?.title}</h4>
                                 <p class="latestContainer__mainText">${this.state.upcomingMovies[0]?.overview}</p>
                             </div>
                         </div>
-                        <div class="latestContainer__secondary">
-                            <div class="secondaryMovie">
-                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path}"/>
-                                <h4 class="secondaryMovie__title">${this.state.upcomingMovies[1]?.title}</h4>
-                            </div>
-                            <div class="secondaryMovie">
-                                <img src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path}"/>
-                                <h4 class="secondaryMovie__title">${this.state.upcomingMovies[2]?.title}</h4>
-                            </div>
+                        <div class="secondaryMovie--first card">
+                            <img class="cardPicture" src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path}"/>
+                            <h4 class="secondaryMovie__title">${this.state.upcomingMovies[1]?.title}</h4>
+                        </div>
+                        <div class="secondaryMovie--last card">
+                            <img class="cardPicture" src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path}"/>
+                            <h4 class="secondaryMovie__title">${this.state.upcomingMovies[2]?.title}</h4>
                         </div>
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Populares</h3>
-                        <div class="movieContainer__popular"></div>
+                        <div class="movieContainer__popular__list movieContainer__popular"></div>
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Em Exibição</h3>
-                        <div class="movieContainer__playing"></div>
+                        <div class="movieContainer__popular__list movieContainer__playing"></div>
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Favoritos</h3>
-                        <div class="movieContainer__favorite"></div>
+                        <div class="movieContainer__popular__list movieContainer__favorite"></div>
                     </section>
                 </main>
                 <footer class="appFooter">
-                    <h1 class="footerBrand"><a class="text-hide">Cinejump!</a></h1>
+                    <a href="" class="footerBrand">
+                        <img class="appBrand__logo" src="${LogoWhite}" alt="Cinejump!"/>
+                        <h1 class="u-srOnly">Cinejump!</h1>
+                    </a>
                     <div class="footerNav">
                         <small>Desenvolvido por Lucas Gabriel</small>
-                        <a href="">Proposta do projeto</a>
-                        <a href="">Protótipo no Figma</a>
-                        <a href="">Apresentação ao comitê</a>
-                        <a href="">Documentação</a>
+                        <a class="footerNav__link" href="">Proposta do projeto</a>
+                        <a class="footerNav__link" href="">Protótipo no Figma</a>
+                        <a class="footerNav__link" href="">Apresentação ao comitê</a>
+                        <a class="footerNav__link" href="">Documentação</a>
                     </div>
                 </footer>
             </div>
