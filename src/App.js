@@ -75,15 +75,15 @@ export class App extends Component {
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Populares</h3>
-                        <div class="movieContainer__popular__list movieContainer__popular"></div>
+                        <div class="movieContainer__popular__list movieContainer__popular">Carregando...</div>
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Em Exibição</h3>
-                        <div class="movieContainer__popular__list movieContainer__playing"></div>
+                        <div class="movieContainer__popular__list movieContainer__playing">Carregando...</div>
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Favoritos</h3>
-                        <div class="movieContainer__popular__list movieContainer__favorite"></div>
+                        <div class="movieContainer__popular__list movieContainer__favorite">Nenhum filme adicionado aos favoritos.</div>
                     </section>
                 </main>
                 <footer class="appFooter">
@@ -173,7 +173,6 @@ export class App extends Component {
     renderMovieSection() {
         RENDER_MOVIE_INFO.forEach((movieInfo) => {
             const movies = this._getMoviesState(movieInfo.stateKey);
-    
             this._renderMovieList(movies, movieInfo.containerSelector);
         });
     }
@@ -205,10 +204,13 @@ export class App extends Component {
      */
     _renderMovieList(movieList, targetContainerSelector) {
         const target = this.nodeRoot.querySelector(targetContainerSelector);
-        target.innerHTML = '';
-        
-        movieList.forEach((movie) => {
-            target.append(movie);
-        });
+
+        if (movieList.length > 0) {
+            target.innerHTML = '';
+
+            movieList.forEach((movie) => {
+                target.append(movie);
+            });
+        }
     }
 }
