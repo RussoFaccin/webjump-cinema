@@ -1,0 +1,23 @@
+@media screen and (max-width: 320px) {
+    .appContent {
+        width: 85%;
+        margin: auto;
+    }
+
+    .latestContainer {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 85vw auto;
+        grid-gap: 10px;
+        grid-template-areas:
+            "latestMain latestMain"
+            "latestSecondaryFirst latestSecondaryLast";
+    }
+
+    .latestContainer__mainTitle {
+        font-size: 15px;
+    }
+
+    .latestContainer__mainDescription {
+        font-size: 12px;
+    }
+}
