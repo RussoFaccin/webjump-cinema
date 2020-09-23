@@ -18,7 +18,7 @@ export class MovieCard extends CustomElement {
     this.innerHTML = `
       <section class="movieCard">
         <img class="movieCard__poster" src="https://image.tmdb.org/t/p/w154${this.state.poster_path}"/>
-        <h3>${this.state.title}</h3>
+        <h3 class="movieCard__title">${this.state.title}</h3>
         <svg class="movieCard__favoriteIcon ${this.getIconStatusClass()}" width="18" height="18" viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg">
             <path d="M9 1.57686C13.9929 -3.89752 26.4762 5.68204 9 18C-8.47622 5.68324 4.00711 -3.89752 9 1.57686Z"/>
         </svg>
