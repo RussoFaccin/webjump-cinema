@@ -31,3 +31,17 @@ movie-card {
 .movieCard__title {
     display: none;;
 }
+
+@media screen and (max-width: 700px) {
+    .movieCard {
+        width: 105px;
+        height: auto;
+    }
+
+    .movieCard__favoriteIcon {
+        width: 15px;
+        height: 15px;
+        top: 10px;
+        right: 10px;
+    }
+}
