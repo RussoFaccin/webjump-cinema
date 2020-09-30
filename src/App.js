@@ -81,11 +81,11 @@ export class App extends Component {
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Em Exibição</h3>
-                        <div class="movieContainer__list movieContainer__playing">Carregando...</div>
+                        <div class="movieContainer__list movieContainer__playing" custom-scroll>Carregando...</div>
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Favoritos</h3>
-                        <div class="movieContainer__list movieContainer__favorite">Nenhum filme adicionado aos favoritos.</div>
+                        <div class="movieContainer__list movieContainer__favorite" custom-scroll>Nenhum filme adicionado aos favoritos.</div>
                     </section>
                 </main>
                 <footer class="appFooter">

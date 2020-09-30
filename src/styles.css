@@ -202,6 +202,7 @@ img {
 
 .movieContainer__list {
     display: flex;
+    overflow: hidden;
 }
 
 movie-card:not(last-of-type) {
