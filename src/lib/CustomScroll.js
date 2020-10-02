@@ -20,18 +20,21 @@ export class CustomScroll {
 
         this.pos.maxLeft = Number((this.scrollContainer.scrollWidth - parentWidth) * -1);
 
-        // Bindings
+        this._setBindings();
+
+        this._setListeners();
+    }
+
+    _setBindings() {
         this._handleDragStart = this._handleDragStart.bind(this);
         this._handleDrag = this._handleDrag.bind(this);
         this._handleDragEnd = this._handleDragEnd.bind(this);
+    }
 
-        if (this._hasScroll()) {
-            this.scrollContainer.addEventListener('dragstart', this._handleDragStart);
-            this.scrollContainer.addEventListener('drag', this._handleDrag);
-            this.scrollContainer.addEventListener('dragend', this._handleDragEnd);
-        } else {
-            this.scrollContainer.removeAttribute('draggable');
-        }
+    _setListeners() {
+        this.scrollContainer.addEventListener('dragstart', this._handleDragStart);
+        this.scrollContainer.addEventListener('drag', this._handleDrag);
+        this.scrollContainer.addEventListener('dragend', this._handleDragEnd);
     }
 
     _handleDragStart(evt) {
