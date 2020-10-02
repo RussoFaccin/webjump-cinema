@@ -2,66 +2,68 @@ export class CustomScroll {
     constructor(htmlElement) {
         const wrapper = document.createElement('div');
         wrapper.classList.add('customScroll__wrapper');
+        wrapper.setAttribute('draggable', 'true');
         wrapper.append(...htmlElement.children);
+
         htmlElement.innerHTML = '';
         htmlElement.append(wrapper);
 
-        this.scrollContainer = htmlElement;
+        this.scrollContainer = wrapper;
 
         this.pos = {
             left: 0,
-            x: 0
+            x: 0,
+            minLeft: 0
         };
 
-        // TO DO: Define scroll range
-        // scrollWidth - offsetWidth
+        const parentWidth = this.scrollContainer.parentElement.clientWidth;
 
-        this.pos.maxLeft = Number(this.scrollContainer.scrollWidth - this.scrollContainer.offsetWidth) * -1;
-        this.pos.minLeft = 0;
+        this.pos.maxLeft = Number((this.scrollContainer.scrollWidth - parentWidth) * -1);
 
         // Bindings
-        this._handleMouseDown = this._handleMouseDown.bind(this);
-        this._handleMove = this._handleMove.bind(this);
-        this._handleMouseUp = this._handleMouseUp.bind(this);
+        this._handleDragStart = this._handleDragStart.bind(this);
+        this._handleDrag = this._handleDrag.bind(this);
+        this._handleDragEnd = this._handleDragEnd.bind(this);
 
         if (this._hasScroll()) {
-            this.scrollContainer.addEventListener('mousedown', this._handleMouseDown);
+            this.scrollContainer.addEventListener('dragstart', this._handleDragStart);
+            this.scrollContainer.addEventListener('drag', this._handleDrag);
+            this.scrollContainer.addEventListener('dragend', this._handleDragEnd);
+        } else {
+            this.scrollContainer.removeAttribute('draggable');
         }
     }
-    
-    _handleMouseDown(evt) {
+
+    _handleDragStart(evt) {
+        const dragImage = document.createElement('img');
+        evt.dataTransfer.setDragImage(dragImage, 0, 0);
+
         this.pos.x = evt.clientX;
-        this.scrollContainer.addEventListener('mousemove', this._handleMove);
-        this.scrollContainer.addEventListener('mouseup', this._handleMouseUp);
     }
 
-    _handleMove(evt) {
-        evt.preventDefault();
-
-        let left;
+    _handleDrag(evt) {
         let offset = evt.clientX - this.pos.x;
 
-        if (
-            this.pos.left + offset <= 0
-            &&
-            this.pos.left + offset >= this.pos.maxLeft
-        ) {
-            left =  Number(this.pos.left) + offset;
-        } else {
-            left = Number(this.scrollContainer.dataset.left );
-        }
+        if (evt.clientX > 0) {
+            offset = evt.clientX - this.pos.x;
 
-        this.scrollContainer.dataset.left = left;
-        this.scrollContainer.style.transform = `translateX(${left}px)`;
+            let left = Number(this.pos.left) + offset;
+
+            if (left <= 0 && left >= this.pos.maxLeft) {
+                this.scrollContainer.dataset.left = left;
+                this.scrollContainer.style.transform = `translateX(${left}px)`;
+            }
+        }
     }
 
-    _handleMouseUp(evt) {
-        this.scrollContainer.removeEventListener('mousemove', this._handleMove);
+    _handleDragEnd(evt) {
         this.pos.left = Number(this.scrollContainer.dataset.left);
     }
 
     _hasScroll() {
-        return (this.scrollContainer.scrollWidth - this.scrollContainer.offsetWidth) > 0 ?
+        const parentWidth = this.scrollContainer.parentElement.clientWidth;
+
+        return (this.scrollContainer.scrollWidth - parentWidth) > 0 ?
             true : false;
     }
 }
