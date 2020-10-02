@@ -8,6 +8,8 @@ import { DataService } from './services/data.service';
 import { Movie } from './models/Movie.model';
 // Components
 import { MovieCard } from './components/movie-card/MovieCard.component';
+// Libs
+import { CustomScroll } from './lib/CustomScroll';
 // Assets
 import LogoWhite from './assets/Logo-white.svg'
 
@@ -75,15 +77,15 @@ export class App extends Component {
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Populares</h3>
-                        <div class="movieContainer__popular__list movieContainer__popular">Carregando...</div>
+                        <div class="movieContainer__list movieContainer__popular" custom-scroll>Carregando...</div>
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Em Exibição</h3>
-                        <div class="movieContainer__popular__list movieContainer__playing">Carregando...</div>
+                        <div class="movieContainer__list movieContainer__playing" custom-scroll>Carregando...</div>
                     </section>
                     <section class="movieContainer">
                         <h3 class="movieContainer__heading">Favoritos</h3>
-                        <div class="movieContainer__popular__list movieContainer__favorite">Nenhum filme adicionado aos favoritos.</div>
+                        <div class="movieContainer__list movieContainer__favorite" custom-scroll>Nenhum filme adicionado aos favoritos.</div>
                     </section>
                 </main>
                 <footer class="appFooter">
@@ -103,6 +105,7 @@ export class App extends Component {
         `;
 
         this.renderMovieSection();
+        this.initCustomScroll();
     }
     
     initState() {
@@ -195,6 +198,14 @@ export class App extends Component {
         this._putMoviesState('favoriteMovies', tmpList)
 
         this.idb.putData(tmpList, 'favorite');
+    }
+
+    initCustomScroll() {
+        const elementList = this.nodeRoot.querySelectorAll('[custom-scroll]');
+        
+        elementList.forEach((el) => {
+            new CustomScroll(el);
+        });
     }
 
     /**

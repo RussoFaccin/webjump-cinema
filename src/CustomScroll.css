@@ -1,0 +1,8 @@
+.customScroll__wrapper {
+    display: flex;
+}
+
+.customScroll__wrapper,
+.customScroll__wrapper * {
+    cursor: grab;
+}

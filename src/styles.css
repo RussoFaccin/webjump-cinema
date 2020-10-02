@@ -200,9 +200,9 @@ img {
     margin-bottom: 10px;
 }
 
-.movieContainer__popular__list {
+.movieContainer__list {
     display: flex;
-    overflow: auto hidden;
+    overflow: hidden;
 }
 
 movie-card:not(last-of-type) {
