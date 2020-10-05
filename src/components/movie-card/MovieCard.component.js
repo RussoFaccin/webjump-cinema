@@ -40,7 +40,7 @@ export class MovieCard extends CustomElement {
   }
 
   _setFavoriteListener() {
-    const elm = this.querySelector('.movieCard');
+    const elm = this.querySelector('.movieCard__favoriteIcon');
     
     elm.addEventListener('click', this.toggleFavorite);
   }
