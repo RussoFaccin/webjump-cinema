@@ -7,7 +7,6 @@ movie-card {
     height: 253px;
     border-radius: 10px;
     overflow: hidden;
-    cursor: pointer;
 }
 
 .movieCard__favoriteIcon {
@@ -15,6 +14,8 @@ movie-card {
     top: 16px;
     right: 16px;
     fill: #000;
+    cursor: pointer;
+    pointer-events: all;
 }
 
 .movieCard__favoriteIcon--active {

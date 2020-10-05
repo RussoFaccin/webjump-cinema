@@ -2,7 +2,6 @@ export class CustomScroll {
     constructor(htmlElement) {
         const wrapper = document.createElement('div');
         wrapper.classList.add('customScroll__wrapper');
-        wrapper.setAttribute('draggable', 'true');
         wrapper.append(...htmlElement.children);
 
         htmlElement.innerHTML = '';
@@ -26,25 +25,23 @@ export class CustomScroll {
     }
 
     _setBindings() {
-        this._handleDragStart = this._handleDragStart.bind(this);
-        this._handleDrag = this._handleDrag.bind(this);
-        this._handleDragEnd = this._handleDragEnd.bind(this);
+        this._handleMouseDown = this._handleMouseDown.bind(this);
+        this._handleMouseMove = this._handleMouseMove.bind(this);
+        this._handleMouseUp = this._handleMouseUp.bind(this);
     }
 
     _setListeners() {
-        this.scrollContainer.addEventListener('dragstart', this._handleDragStart);
-        this.scrollContainer.addEventListener('drag', this._handleDrag);
-        this.scrollContainer.addEventListener('dragend', this._handleDragEnd);
+        this.scrollContainer.addEventListener('mousedown', this._handleMouseDown);
+        this.scrollContainer.addEventListener('mouseup', this._handleMouseUp);
     }
 
-    _handleDragStart(evt) {
-        const dragImage = document.createElement('img');
-        evt.dataTransfer.setDragImage(dragImage, 0, 0);
-
+    _handleMouseDown(evt) {
+        evt.preventDefault();
         this.pos.x = evt.clientX;
+        this.scrollContainer.addEventListener('mousemove', this._handleMouseMove);
     }
 
-    _handleDrag(evt) {
+    _handleMouseMove(evt) {
         let offset = evt.clientX - this.pos.x;
 
         if (evt.clientX > 0) {
@@ -59,7 +56,8 @@ export class CustomScroll {
         }
     }
 
-    _handleDragEnd(evt) {
+    _handleMouseUp(evt) {
+        this.scrollContainer.removeEventListener('mousemove', this._handleMouseMove);
         this.pos.left = Number(this.scrollContainer.dataset.left);
     }
 
