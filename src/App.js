@@ -204,7 +204,9 @@ export class App extends Component {
         const elementList = this.nodeRoot.querySelectorAll('[custom-scroll]');
         
         elementList.forEach((el) => {
-            new CustomScroll(el);
+            if (el.firstElementChild) {
+                new CustomScroll(el);
+            }
         });
     }
 
