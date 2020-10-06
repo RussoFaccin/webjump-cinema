@@ -66,11 +66,11 @@ export class App extends Component {
                                 <p class="latestContainer__mainText">${this.state.upcomingMovies[0]?.overview}</p>
                             </div>
                         </div>
-                        <div class="secondaryMovie--first card">
+                        <div class="secondaryMovie secondaryMovie--first card">
                             <img class="cardPicture" src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path}"/>
                             <h4 class="secondaryMovie__title">${this.state.upcomingMovies[1]?.title}</h4>
                         </div>
-                        <div class="secondaryMovie--last card">
+                        <div class="secondaryMovie secondaryMovie--last card">
                             <img class="cardPicture" src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path}"/>
                             <h4 class="secondaryMovie__title">${this.state.upcomingMovies[2]?.title}</h4>
                         </div>

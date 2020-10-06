@@ -54,6 +54,7 @@ img {
 }
 
 .appBrand {
+    display: flex;
     order: 2;
 }
 
