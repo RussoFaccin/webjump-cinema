@@ -1,3 +1,7 @@
+.movieContainer__list {
+    position: initial;
+}
+
 .customScroll__wrapper {
     display: flex;
 }
