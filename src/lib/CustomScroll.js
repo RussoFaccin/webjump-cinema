@@ -32,16 +32,30 @@ export class CustomScroll {
 
     _setListeners() {
         this.scrollContainer.addEventListener('mousedown', this._handleMouseDown);
+        this.scrollContainer.addEventListener('touchstart', this._handleMouseDown);
         this.scrollContainer.addEventListener('mouseup', this._handleMouseUp);
+        this.scrollContainer.addEventListener('touchend', this._handleMouseUp);
     }
 
     _handleMouseDown(evt) {
         evt.preventDefault();
+
+        let eventType = 'mousemove';
+
+        if (evt.touches) {
+            evt.clientX = evt.touches[0].clientX;
+            eventType = 'touchmove';
+        }
+
         this.pos.x = evt.clientX;
-        this.scrollContainer.addEventListener('mousemove', this._handleMouseMove);
+        this.scrollContainer.addEventListener(eventType, this._handleMouseMove);
     }
 
     _handleMouseMove(evt) {
+        if (evt.touches) {
+            evt.clientX = evt.touches[0].clientX;
+        }
+
         let offset = evt.clientX - this.pos.x;
 
         if (evt.clientX > 0) {
