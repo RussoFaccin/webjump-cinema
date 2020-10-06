@@ -43,6 +43,7 @@ export class MovieCard extends CustomElement {
     const elm = this.querySelector('.movieCard__favoriteIcon');
     
     elm.addEventListener('click', this.toggleFavorite);
+    elm.addEventListener('touchstart', this.toggleFavorite);
   }
 
   getIconStatusClass() {
