@@ -1,5 +1,6 @@
 @media screen and (max-width: 700px) {
-    .appContent {
+    .appMain,
+    .appHeader {
         width: 85%;
         margin: auto;
     }
@@ -24,6 +25,10 @@
     .movieContainer__heading {
         font-size: 18px;
         font-weight: 400;
+    }
+
+    .secondaryMovie {
+        height: 35vw;
     }
 
     .movieCard {
