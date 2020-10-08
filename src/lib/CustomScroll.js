@@ -9,25 +9,19 @@ export class CustomScroll {
 
         this.scrollContainer = wrapper;
 
-        this.pos = {
-            left: 0,
-            x: 0,
-            minLeft: 0
-        };
-
-        const parentWidth = this.scrollContainer.parentElement.clientWidth;
-
-        this.pos.maxLeft = Number((this.scrollContainer.scrollWidth - parentWidth) * -1);
+        this._calculateBounds();
 
         this._setBindings();
 
         this._setListeners();
+        this._setResizeListener();
     }
 
     _setBindings() {
         this._handleMouseDown = this._handleMouseDown.bind(this);
         this._handleMouseMove = this._handleMouseMove.bind(this);
         this._handleMouseUp = this._handleMouseUp.bind(this);
+        this._calculateBounds = this._calculateBounds.bind(this);
     }
 
     _setListeners() {
@@ -35,6 +29,23 @@ export class CustomScroll {
         this.scrollContainer.addEventListener('touchstart', this._handleMouseDown);
         this.scrollContainer.addEventListener('mouseup', this._handleMouseUp);
         this.scrollContainer.addEventListener('touchend', this._handleMouseUp);
+    }
+
+    _setResizeListener() {
+        window.addEventListener('resize', this._calculateBounds);
+    }
+
+    _calculateBounds() {
+        this.pos = {
+            left: 0,
+            x: 0,
+            minLeft: 0,
+            maxLeft: 0
+        };
+
+        const parentWidth = this.scrollContainer.parentElement.clientWidth;
+
+        this.pos.maxLeft = Number((this.scrollContainer.scrollWidth - parentWidth) * -1);
     }
 
     _handleMouseDown(evt) {
