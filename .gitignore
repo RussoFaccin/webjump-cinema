@@ -1,3 +1,5 @@
 node_modules/
 # Public files / folders
-public/
+public/*
+!public/main.js
+!public/sw.js
