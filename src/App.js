@@ -10,8 +10,6 @@ import { Movie } from './models/Movie.model';
 import { MovieCard } from './components/movie-card/MovieCard.component';
 // Libs
 import { CustomScroll } from './lib/CustomScroll';
-// Assets
-import LogoWhite from './assets/Logo-white.svg'
 
 export class App extends Component {
     constructor(elSelector) {
@@ -37,7 +35,7 @@ export class App extends Component {
             <div class="appContent">
                 <header class="appHeader">
                     <a href="" class="appBrand">
-                        <img class="appBrand__logo" src="${LogoWhite}" alt="Cinejump!"/>
+                        <img class="appBrand__logo" src="/src/assets/Logo-white.svg" alt="Cinejump!"/>
                         <h1 class="u-srOnly">Cinejump!</h1>
                     </a>
                     <div class="appHeader__action appHeader__action--navigation">
@@ -90,7 +88,7 @@ export class App extends Component {
                 </main>
                 <footer class="appFooter">
                     <a href="" class="footerBrand">
-                        <img class="appBrand__logo" src="${LogoWhite}" alt="Cinejump!"/>
+                        <img class="appBrand__logo" src="/src/assets/Logo-white.svg" alt="Cinejump!"/>
                         <h1 class="u-srOnly">Cinejump!</h1>
                     </a>
                     <div class="footerNav">
