@@ -238,6 +238,16 @@ movie-card:not(last-of-type) {
     padding: 4px 0;
 }
 
+/*##### SnackBar #####*/
+
+.snackBar__container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
 /*
 | --------------------------------------------------------------------------------
 | Utils
