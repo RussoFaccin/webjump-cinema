@@ -22,7 +22,6 @@ self.addEventListener('fetch', (evt) => {
             const isOnline = navigator.onLine;
 
             if (response && !isOnline) {
-                console.log('isOnline', isOnline);
                 return response;
             } else {
                 return fetch(evt.request)
