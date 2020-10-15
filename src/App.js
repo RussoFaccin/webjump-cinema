@@ -8,6 +8,7 @@ import { DataService } from './services/data.service';
 import { Movie } from './models/Movie.model';
 // Components
 import { MovieCard } from './components/movie-card/MovieCard.component';
+import { SnackBar } from  './components/snack-bar/SnackBar.component';
 // Libs
 import { CustomScroll } from './lib/CustomScroll';
 
@@ -22,10 +23,14 @@ export class App extends Component {
         this.initState();
 
         this.setBindings();
+
+        this.setOfflineListener();
         
         this.getMoviesAPI();
 
         this.getFavoriteMovies();
+
+        this.appendSnackBar();
 
         this.render();
     }
@@ -99,6 +104,7 @@ export class App extends Component {
                         <a class="footerNav__link" href="">Documentação</a>
                     </div>
                 </footer>
+                <div class="snackBar__container"></div>
             </div>
         `;
 
@@ -117,6 +123,24 @@ export class App extends Component {
 
     setBindings() {
         this.toggleFavorite = this.toggleFavorite.bind(this);
+        this._updateOnlineStatus = this._updateOnlineStatus.bind(this);
+    }
+
+    setOfflineListener() {
+        window.addEventListener('online', this._updateOnlineStatus);
+        window.addEventListener('offline', this._updateOnlineStatus);
+    }
+
+    _updateOnlineStatus() {
+        const isOnline = navigator.onLine;
+
+        this.snackBar.open(`
+            Você está ${this._getOnlineStatus()}
+        `);
+    }
+
+    _getOnlineStatus() {
+        return navigator.onLine ? 'online' : 'offline';
     }
 
     async getMoviesAPI() {
@@ -196,6 +220,16 @@ export class App extends Component {
         this._putMoviesState('favoriteMovies', tmpList)
 
         this.idb.putData(tmpList, 'favorite');
+    }
+    /**
+     * Append SnackBar to element
+     * @param {String} containerSelector Container selector element
+     */
+    appendSnackBar() {
+        this.snackBar = new SnackBar();
+        this.snackBar.classList.add('snackBar__container');
+        
+        document.body.append(this.snackBar);
     }
 
     initCustomScroll() {
