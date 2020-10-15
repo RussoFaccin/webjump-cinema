@@ -206,7 +206,7 @@ img {
     overflow: hidden;
 }
 
-movie-card:not(last-of-type) {
+movie-card:not(:last-of-type) {
     margin-right: 15px;
 }
 
