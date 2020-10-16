@@ -4,12 +4,13 @@ export class CustomScroll {
         wrapper.classList.add('customScroll__wrapper');
         wrapper.append(...htmlElement.children);
 
-        htmlElement.innerHTML = '';
-        htmlElement.append(wrapper);
+        this.pos = {
+            x: 0,
+            left: 0
+        }
 
-        this.scrollContainer = wrapper;
-
-        this._calculateBounds();
+        this.scrollContainer = htmlElement;
+        this.scrollContainer.append(wrapper);
 
         this._setBindings();
 
@@ -21,7 +22,6 @@ export class CustomScroll {
         this._handleMouseDown = this._handleMouseDown.bind(this);
         this._handleMouseMove = this._handleMouseMove.bind(this);
         this._handleMouseUp = this._handleMouseUp.bind(this);
-        this._calculateBounds = this._calculateBounds.bind(this);
     }
 
     _setListeners() {
@@ -33,19 +33,6 @@ export class CustomScroll {
 
     _setResizeListener() {
         window.addEventListener('resize', this._calculateBounds);
-    }
-
-    _calculateBounds() {
-        this.pos = {
-            left: 0,
-            x: 0,
-            minLeft: 0,
-            maxLeft: 0
-        };
-
-        const parentWidth = this.scrollContainer.parentElement.clientWidth;
-
-        this.pos.maxLeft = Number((this.scrollContainer.scrollWidth - parentWidth) * -1);
     }
 
     _handleMouseDown(evt) {
@@ -69,21 +56,16 @@ export class CustomScroll {
 
         let offset = evt.clientX - this.pos.x;
 
-        if (evt.clientX > 0) {
-            offset = evt.clientX - this.pos.x;
+        if (evt.clientX !== 0) {
+            let left = Number(this.pos.left) - offset;
 
-            let left = Number(this.pos.left) + offset;
-
-            if (left <= 0 && left >= this.pos.maxLeft) {
-                this.scrollContainer.dataset.left = left;
-                this.scrollContainer.style.transform = `translateX(${left}px)`;
-            }
+            this.scrollContainer.scrollLeft = left;
         }
     }
 
     _handleMouseUp(evt) {
         this.scrollContainer.removeEventListener('mousemove', this._handleMouseMove);
-        this.pos.left = Number(this.scrollContainer.dataset.left);
+        this.pos.left = Number(this.scrollContainer.scrollLeft);
     }
 
     _hasScroll() {
