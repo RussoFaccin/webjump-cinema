@@ -1,12 +1,7 @@
-.movieContainer__list {
-    position: initial;
-}
-
 .customScroll__wrapper {
     display: flex;
 }
 
-.customScroll__wrapper,
-.customScroll__wrapper * {
-    cursor: grab;
+.customScroll__wrapper--has-scroll {
+    cursor: all-scroll;
 }
