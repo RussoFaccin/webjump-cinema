@@ -3,3 +3,6 @@ node_modules/
 public/*
 !public/main.js
 !public/sw.js
+# Menifest json files
+!public/icons/
+!public/manifest.json
