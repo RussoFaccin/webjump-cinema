@@ -1,7 +1,9 @@
 export class CustomScroll {
     constructor(htmlElement) {
         const wrapper = document.createElement('div');
+
         wrapper.classList.add('customScroll__wrapper');
+        
         wrapper.append(...htmlElement.children);
 
         this.pos = {
@@ -14,8 +16,12 @@ export class CustomScroll {
 
         this._setBindings();
 
-        this._setListeners();
-        this._setResizeListener();
+        if (this._hasScroll(htmlElement)) {
+            wrapper.classList.add('customScroll__wrapper--has-scroll');
+            
+            this._setListeners();
+            this._setResizeListener();
+        }
     }
 
     _setBindings() {
@@ -68,10 +74,12 @@ export class CustomScroll {
         this.pos.left = Number(this.scrollContainer.scrollLeft);
     }
 
-    _hasScroll() {
-        const parentWidth = this.scrollContainer.parentElement.clientWidth;
+    _hasScroll(element) {
+        const parentWidth = element.parentElement.clientWidth;
+        const hasScroll = (element.scrollWidth - parentWidth) > 0 ?
+            true :
+            false;
 
-        return (this.scrollContainer.scrollWidth - parentWidth) > 0 ?
-            true : false;
+        return hasScroll;
     }
 }
