@@ -33,7 +33,9 @@ export class CustomScroll {
     _setListeners() {
         this.scrollContainer.addEventListener('mousedown', this._handleMouseDown);
         this.scrollContainer.addEventListener('touchstart', this._handleMouseDown);
+        
         this.scrollContainer.addEventListener('mouseup', this._handleMouseUp);
+        this.scrollContainer.addEventListener('mouseleave', this._handleMouseUp);
         this.scrollContainer.addEventListener('touchend', this._handleMouseUp);
     }
 
