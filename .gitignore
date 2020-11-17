@@ -1,1 +1,8 @@
 node_modules/
+# Public files / folders
+public/*
+!public/main.js
+!public/sw.js
+# Menifest json files
+!public/icons/
+!public/manifest.json

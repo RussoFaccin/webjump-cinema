@@ -1,6 +1,9 @@
 import { api } from './api/api';
+// Styles
 import './styles.css';
+import './multires.css';
+import './CustomScroll.css';
+// Main component
+import { App } from './App';
 
-class App {}
-
-const app = new App();
+const app = new App('.appRoot');

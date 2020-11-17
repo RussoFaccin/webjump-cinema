@@ -1,0 +1,267 @@
+/*
+| --------------------------------------------------------------------------------
+| Fonts
+| --------------------------------------------------------------------------------
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap');
+
+/*
+| --------------------------------------------------------------------------------
+| Custom properties
+| --------------------------------------------------------------------------------
+*/
+
+:root {
+    --iconSearch: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9ImJsYWNrIiBmaWxsLW9wYWNpdHk9IjAuMDEiLz4KPHBhdGggZD0iTTE4Ljg1NzQgMjUuMTQyOUMyMy4yNzU3IDI1LjE0MjkgMjYuODU3NCAyMS41NjExIDI2Ljg1NzQgMTcuMTQyOUMyNi44NTc0IDEyLjcyNDYgMjMuMjc1NyA5LjE0Mjg2IDE4Ljg1NzQgOS4xNDI4NkMxNC40MzkxIDkuMTQyODYgMTAuODU3NCAxMi43MjQ2IDEwLjg1NzQgMTcuMTQyOUMxMC44NTc0IDIxLjU2MTEgMTQuNDM5MSAyNS4xNDI5IDE4Ljg1NzQgMjUuMTQyOVoiIHN0cm9rZT0iI0Y5RjlGOSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHBhdGggZD0iTTI4Ljg1OTggMjcuMTQyOEwyNC41MDk4IDIyLjc5MjgiIHN0cm9rZT0iI0Y5RjlGOSIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+Cg==");
+    --iconProfile: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiNDNEM0QzQiIGZpbGwtb3BhY2l0eT0iMC4wMSIvPgo8cGF0aCBkPSJNMjAgMTIuODc1QzE3LjUxNTYgMTIuODc1IDE1LjUgMTQuODkwNiAxNS41IDE3LjM3NUMxNS41IDE5Ljg1OTQgMTcuNTE1NiAyMS44NzUgMjAgMjEuODc1QzIyLjQ4NDQgMjEuODc1IDI0LjUgMTkuODU5NCAyNC41IDE3LjM3NUMyNC41IDE0Ljg5MDYgMjIuNDg0NCAxMi44NzUgMjAgMTIuODc1Wk0yMCAxOS42MjVDMTguNzU3OCAxOS42MjUgMTcuNzUgMTguNjE3MiAxNy43NSAxNy4zNzVDMTcuNzUgMTYuMTMyOCAxOC43NTc4IDE1LjEyNSAyMCAxNS4xMjVDMjEuMjQyMiAxNS4xMjUgMjIuMjUgMTYuMTMyOCAyMi4yNSAxNy4zNzVDMjIuMjUgMTguNjE3MiAyMS4yNDIyIDE5LjYyNSAyMCAxOS42MjVaTTIwIDguMzc1QzEzLjU3ODEgOC4zNzUgOC4zNzUgMTMuNTc4MSA4LjM3NSAyMEM4LjM3NSAyNi40MjE5IDEzLjU3ODEgMzEuNjI1IDIwIDMxLjYyNUMyNi40MjE5IDMxLjYyNSAzMS42MjUgMjYuNDIxOSAzMS42MjUgMjBDMzEuNjI1IDEzLjU3ODEgMjYuNDIxOSA4LjM3NSAyMCA4LjM3NVpNMjAgMjkuMzc1QzE3LjY3MDMgMjkuMzc1IDE1LjU0MjIgMjguNTE3MiAxMy45MDE2IDI3LjEwNjNDMTQuNiAyNi4wMjgxIDE1Ljc5NTMgMjUuMjk2OSAxNy4xNjQxIDI1LjI1NDdDMTguMTM5MSAyNS41NTQ3IDE5LjA2NzIgMjUuNzA0NyAyMCAyNS43MDQ3QzIwLjkzMjggMjUuNzA0NyAyMS44NjA5IDI1LjU1OTQgMjIuODM1OSAyNS4yNTQ3QzI0LjIwNDcgMjUuMzAxNiAyNS40IDI2LjAyODEgMjYuMDk4NCAyNy4xMDYzQzI0LjQ1NzggMjguNTE3MiAyMi4zMjk3IDI5LjM3NSAyMCAyOS4zNzVaTTI3LjYyNjYgMjUuNDMyOEMyNi40ODI4IDIzLjk2MDkgMjQuNzE1NiAyMyAyMi43IDIzQzIyLjIyMTkgMjMgMjEuNDgxMiAyMy40NSAyMCAyMy40NUMxOC41MjM0IDIzLjQ1IDE3Ljc3ODEgMjMgMTcuMyAyM0MxNS4yODkxIDIzIDEzLjUyMTkgMjMuOTYwOSAxMi4zNzM0IDI1LjQzMjhDMTEuMjc2NiAyMy45IDEwLjYyNSAyMi4wMjUgMTAuNjI1IDIwQzEwLjYyNSAxNC44Mjk3IDE0LjgyOTcgMTAuNjI1IDIwIDEwLjYyNUMyNS4xNzAzIDEwLjYyNSAyOS4zNzUgMTQuODI5NyAyOS4zNzUgMjBDMjkuMzc1IDIyLjAyNSAyOC43MjM0IDIzLjkgMjcuNjI2NiAyNS40MzI4WiIgZmlsbD0iI0Y5RjlGOSIvPgo8L3N2Zz4K");
+    --mainColor: #E83F5B;
+}
+
+/*
+| --------------------------------------------------------------------------------
+| General
+| --------------------------------------------------------------------------------
+*/
+
+body {
+    font-family: 'Ubuntu', sans-serif;
+    font-weight: 300;
+}
+
+img {
+    max-width: 100%;
+}
+
+.appRoot {
+    background-image: linear-gradient(
+        180deg,
+        var(--mainColor) 0,
+        var(--mainColor) 328px,
+        #fff 328px,
+        #fff 100%
+    );
+    background-attachment: local;
+}
+
+/*##### Header #####*/
+
+.appHeader {
+    display: flex;
+    max-width: 1000px;
+    margin: auto;
+    padding: 22px 0;
+}
+
+.appBrand {
+    display: flex;
+    order: 2;
+}
+
+.brandLink {
+    display: flex;
+}
+
+.appHeader__action {
+    flex: 1;
+}
+
+.appHeader__action--navigation {
+    order: 1;
+    display: flex;
+    align-items: center;
+    color: #FFF;
+}
+
+.appHeader__action--subNav {
+    order: 3;
+}
+
+.navLink {
+    color: inherit;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+/*##### Sub navigation #####*/
+
+.subNav {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.subNav__action {
+    padding: 0;
+    border: 0;
+    background-color: transparent;
+}
+
+.subNav__action:focus {
+    border: 0;
+    outline: 0;
+}
+
+.subNav__icon::before {
+    display: block;
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.subNav__icon--iconSearch {
+    background-image: var(--iconSearch);
+}
+
+.subNav__icon--iconProfile {
+    background-image: var(--iconProfile);
+}
+
+/*##### Main #####*/
+
+.appMain {
+    max-width: 1000px;
+    margin: auto;
+}
+
+/*##### Latest container #####*/
+.latestContainer {
+    display: grid;
+    grid-template-columns: 1fr 274px;
+    grid-template-rows: 156px 156px;
+    grid-gap: 16px;
+    grid-template-areas: 
+        "latestMain latestSecondaryFirst"
+        "latestMain latestSecondaryLast";
+    ;
+}
+
+.latestContainer__main {
+    grid-area: latestMain;
+}
+
+.latestContainer__mainDescription {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+    padding: 15px;
+    font-weight: 300;
+    font-size: 15px;
+}
+
+.latestContainer__mainTitle {
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.15;
+}
+
+.secondaryMovie--first {
+    grid-area: latestSecondaryFirst;
+}
+
+.secondaryMovie--last {
+    grid-area: latestSecondaryLast;
+}
+
+.secondaryMovie__title {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 4px 10px;
+    font-size: 15px;
+    font-weight: 300;
+    background-color: rgba(0, 0, 0, 0.75);
+    color: white;
+}
+
+.card {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.cardPicture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/*##### Section cards #####*/
+
+.movieContainer {
+    margin-top: 20px;
+}
+
+.movieContainer__heading {
+    color: var(--mainColor);
+    font-weight: 300;
+    font-size: 22px;
+    margin-bottom: 10px;
+}
+
+.movieContainer__list {
+    display: flex;
+    overflow: hidden;
+}
+
+movie-card:not(:last-of-type) {
+    margin-right: 15px;
+}
+
+/*##### Footer #####*/
+.appFooter {
+    background-color: var(--mainColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.footerBrand {
+    margin-right: 185px;
+}
+
+.footerNav {
+    display: flex;
+    flex-direction: column;
+    color: #FFF;
+}
+
+.footerNav__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    padding: 4px 0;
+}
+
+/*##### SnackBar #####*/
+
+.snackBar__container {
+    display: flex;
+    justify-content: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/*
+| --------------------------------------------------------------------------------
+| Utils
+| --------------------------------------------------------------------------------
+*/
+
+.u-srOnly {
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}

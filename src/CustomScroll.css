@@ -1,0 +1,7 @@
+.customScroll__wrapper {
+    display: flex;
+}
+
+.customScroll__wrapper--has-scroll {
+    cursor: all-scroll;
+}
