@@ -13,7 +13,8 @@
         {
             "src": "icons/android-icon-192x192-dunplab-manifest-23717.png",
             "type": "image/png",
-            "sizes": "192x192"
+            "sizes": "192x192",
+            "purpose": "maskable"
         },
         {
             "src": "icons/apple-icon-180x180-dunplab-manifest-23717.png",
