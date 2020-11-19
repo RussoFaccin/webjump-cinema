@@ -78,11 +78,21 @@ export class App extends Component {
                             </div>
                         </div>
                         <div class="secondaryMovie secondaryMovie--first card">
-                            <img class="cardPicture" src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path}"/>
+                            <img class="cardPicture"
+                            srcset="https://image.tmdb.org/t/p/w300${this.state.upcomingMovies[1]?.backdrop_path} 300w,
+                                    https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path} 780w,
+                                    https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[1]?.backdrop_path} 1280w"
+                            sizes="(max-width: 700px) 40.85vw, 274px"
+                                src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[1]?.backdrop_path}"/>
                             <h4 class="secondaryMovie__title">${this.state.upcomingMovies[1]?.title}</h4>
                         </div>
                         <div class="secondaryMovie secondaryMovie--last card">
-                            <img class="cardPicture" src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path}"/>
+                            <img class="cardPicture"
+                            srcset="https://image.tmdb.org/t/p/w300${this.state.upcomingMovies[2]?.backdrop_path} 300w,
+                                    https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path} 780w,
+                                    https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[2]?.backdrop_path} 1280w"
+                            sizes="(max-width: 700px) 40.85vw, 274px"
+                            src="https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[2]?.backdrop_path}"/>
                             <h4 class="secondaryMovie__title">${this.state.upcomingMovies[2]?.title}</h4>
                         </div>
                     </section>
