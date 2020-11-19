@@ -65,7 +65,13 @@ export class App extends Component {
                 <main class="appMain">
                     <section class="latestContainer">
                         <div class="latestContainer__main card">
-                            <img class="cardPicture" src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdrop_path}"/>
+                            <img class="cardPicture"
+                                srcset="https://image.tmdb.org/t/p/w300${this.state.upcomingMovies[0]?.backdrop_path} 300w,
+                                        https://image.tmdb.org/t/p/w780${this.state.upcomingMovies[0]?.backdrop_path} 780w,
+                                        https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdrop_path} 1280w"
+                                sizes="(max-width: 700px) 85vw, 710px"
+                                src="https://image.tmdb.org/t/p/w1280${this.state.upcomingMovies[0]?.backdrop_path}"
+                                "/>
                             <div class="latestContainer__mainDescription">
                                 <h4 class="latestContainer__mainTitle">${this.state.upcomingMovies[0]?.title}</h4>
                                 <p class="latestContainer__mainText">${this.state.upcomingMovies[0]?.overview}</p>
