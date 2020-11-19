@@ -4,7 +4,6 @@ const CACHE_FILES = [
     '/index.html',
     '/main.js',
     '/bundle.js',
-    '/src/assets/Logo-white.svg'
 ];
 
 self.addEventListener('install', (evt) => {
