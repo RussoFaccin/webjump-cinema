@@ -3,12 +3,12 @@
     "name": "Cinejump!",
     "lang": "en",
     "description": "Projeto Academia Webjump. Trilha 1",
-    "start_url": "/",
+    "start_url": "./",
     "background_color": "#ffffff",
     "theme_color": "#e83f5b",
     "dir": "ltr",
     "display": "standalone",
-    "scope": "/",
+    "scope": "./",
     "orientation": "any",
     "icons": [
         {
