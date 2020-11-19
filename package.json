@@ -10,13 +10,15 @@
     "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.9.6",
     "babel-loader": "^8.1.0",
+    "http-server": "^0.12.3",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
   "scripts": {
     "dev": "webpack-dev-server --mode=development -w",
-    "build": "webpack --mode=production"
+    "build": "webpack --mode=production",
+    "serve": "http-server"
   },
   "dependencies": {
     "axios": "^0.19.2",
