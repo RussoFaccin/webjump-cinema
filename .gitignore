@@ -5,4 +5,5 @@ public/*
 !public/sw.js
 # Menifest json files
 !public/icons/
+!public/splashscreens/
 !public/manifest.json
