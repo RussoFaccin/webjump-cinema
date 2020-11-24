@@ -4,6 +4,7 @@ Projeto final da Trilha 1
 
 Repositório:
 https://github.com/RussoFaccin/webjump-cinema
+
 Demonstração:
 https://cinejump.netlify.app/
 
